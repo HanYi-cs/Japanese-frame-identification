@@ -18,10 +18,10 @@ def parse_args():
         input_path = "../data/source/XML_Data20220314/lu"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_path", type=str, default=input_path)
-    parser.add_argument("--output_path", type=str, default="../data/framenet/raw")
+    parser.add_argument("--input_path", type=str, default=input_path) # 调用 add_argument() 方法添加参数
+    parser.add_argument("--output_path", type=str, default="")
     parser.add_argument("--language", type=str, default=LANGUAGE)
-    return parser.parse_args()
+    return parser.parse_args() # 调用 parse_args() 方法解析参数
 
 
 def make_dir_path(args):
@@ -41,7 +41,7 @@ def make_exemplar_dataframe(file_list):
     ex_list = []
     for file in tqdm(file_list):
         with open(file, "r") as f:
-            doc = xmltodict.parse(f.read())
+            doc = xmltodict.parse(f.read()) # xmltodict.parse()方法可以将xml数据转为python中的dict字典数据
         if "subCorpus" not in doc["lexUnit"]:
             continue
         subcorpus_dict_list = (
@@ -108,5 +108,5 @@ def main():
     )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # 该语句用来当文件当作脚本运行时候，就执行代码；但是当文件被当做Module被import的时候，就不执行相关代码。
     main()
